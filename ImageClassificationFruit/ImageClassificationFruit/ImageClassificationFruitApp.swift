@@ -6,68 +6,92 @@
 //
 
 import SwiftUI
-import CoreML
-import Vision
 
 struct ImageClassificationFruitApp: View {
     
-    @State private var showSheet: Bool = false
-    @State private var showPhotoOptions: Bool = false
-    @State private var image: UIImage?
-    @State private var sourceType: UIImagePickerController.SourceType = .camera
+    let photos = ["banana","tiger","bottle"]
+    @State private var currentIndex: Int = 0
+    @State private var classificationLabel: String = ""
     
     let model = MobileNetV2()
     
-    var body: some View {
+    private func performImageClassification() {
         
-        NavigationView {
+        let currentImageName = photos[currentIndex]
+        
+        guard let img = UIImage(named: currentImageName),
+            let resizedImage = img.resizeTo(size: CGSize(width: 224, height: 224)),
+            let buffer = resizedImage.toBuffer() else {
+                return
+        }
+        
+        let output = try? model.prediction(image: buffer)
+        
+        if let output = output {
             
-            VStack {
-                Spacer()
-                  Image(uiImage: image ?? UIImage(named: "placeholder")!)
-                    .resizable()
-                    .frame(width: 300, height: 300)
-                
-                Button("Choose Picture") {
-                    // open action sheet
-                    self.showSheet = true
+            //self.classificationLabel = output.classLabel
+            let results = output.classLabelProbs.sorted { $0.1 > $1.1 }
+            
+            let result = results.map { (key, value) in
+                return "\(key) = \(value * 100)%"
+            }.joined(separator: "\n")
+            
+            classificationLabel = result
+            
+        }
+        
+        
+    }
+    
+    var body: some View {
+        VStack {
+            Image(photos[currentIndex])
+            .resizable()
+                .frame(width: 200, height: 200)
+            HStack {
+                Button("Previous") {
                     
-                }.padding()
+                    if self.currentIndex >= self.photos.count {
+                        self.currentIndex = self.currentIndex - 1
+                    } else {
+                        self.currentIndex = 0
+                    }
+                    
+                    }.padding()
                     .foregroundColor(Color.white)
                     .background(Color.gray)
                     .cornerRadius(10)
-                    .actionSheet(isPresented: $showSheet) {
-                        ActionSheet(title: Text("Select Photo"), message: Text("Choose"), buttons: [
-                            .default(Text("Photo Library")) {
-                                // open photo library
-                                self.showPhotoOptions = true
-                                self.sourceType = .photoLibrary
-                            },
-                            .default(Text("Camera")) {
-                                // open camera
-                                self.showPhotoOptions = true
-                                self.sourceType = .camera
-                            },
-                            .cancel()
-                        ])
-                        
+                    .frame(width: 100)
+                
+                Button("Next") {
+                    if self.currentIndex < self.photos.count - 1 {
+                        self.currentIndex = self.currentIndex + 1
+                    } else {
+                        self.currentIndex = 0
+                    }
                 }
+                .padding()
+                .foregroundColor(Color.white)
+                .frame(width: 100)
+                .background(Color.gray)
+                .cornerRadius(10)
+            
                 
-                Spacer()
                 
-                Button("Classify") {
-                    
-                    // perform image classification
-                    
-                }.padding()
-                    .foregroundColor(Color.white)
-                    .background(Color.green)
-                    .cornerRadius(10)
+            }.padding()
+            
+            Button("Classify") {
+                // classify the image here
+                self.performImageClassification()
                 
-            }
-            .navigationBarTitle("Image Classification")
-        }.sheet(isPresented: $showPhotoOptions) {
-            ImagePicker(image: self.$image, isShown: self.$showPhotoOptions, sourceType: self.sourceType)
+            }.padding()
+            .foregroundColor(Color.white)
+            .background(Color.green)
+            .cornerRadius(8)
+            
+            Text(classificationLabel)
+                .font(.largeTitle)
+            .padding()
         }
     }
 }
