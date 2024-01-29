@@ -1,19 +1,21 @@
 //
-//  ImageClassificationFruitApp.swift
+//  ImageClassificationFruit.swift
 //  ImageClassificationFruit
 //
 //  Created by don't touch me on 1/29/24.
 //
 
 import SwiftUI
+import CoreML
 
-struct ImageClassificationFruitApp: View {
+struct ImageClassificationFruitView: View {
     
     let photos = ["banana","tiger","bottle"]
     @State private var currentIndex: Int = 0
     @State private var classificationLabel: String = ""
     
-    let model = MobileNetV2()
+    
+    let model = MobileNetV2(model: MLModel())
     
     private func performImageClassification() {
         
@@ -37,10 +39,7 @@ struct ImageClassificationFruitApp: View {
             }.joined(separator: "\n")
             
             classificationLabel = result
-            
         }
-        
-        
     }
     
     var body: some View {
@@ -75,8 +74,6 @@ struct ImageClassificationFruitApp: View {
                 .frame(width: 100)
                 .background(Color.gray)
                 .cornerRadius(10)
-            
-                
                 
             }.padding()
             
@@ -96,8 +93,8 @@ struct ImageClassificationFruitApp: View {
     }
 }
 
-struct ContentView_Previews: PreviewProvider {
+struct ImageClassificationFruitView_Previews: PreviewProvider {
     static var previews: some View {
-        ImageClassificationFruitApp()
+        ImageClassificationFruitView()
     }
 }
