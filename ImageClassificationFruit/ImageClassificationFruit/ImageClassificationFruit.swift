@@ -15,7 +15,7 @@ struct ImageClassificationFruitView: View {
     @State private var classificationLabel: String = ""
     
     
-    let model = MobileNetV2(model: MLModel())
+    let model = MobileNetV2()
     
     private func performImageClassification() {
         
@@ -88,6 +88,7 @@ struct ImageClassificationFruitView: View {
             
             Text(classificationLabel)
                 .font(.largeTitle)
+                .lineLimit(1)
             .padding()
         }
     }
