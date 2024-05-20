@@ -6,11 +6,14 @@
 //
 
 import SwiftUI
+import CoreML
 
 struct RandomImageView: View {
     
     let images = ["1", "2", "3", "4"]
     @State private var currentIndex =  0
+    
+    let model = try! MobileNetV2(configuration: MLModelConfiguration())
     
     var body: some View {
         VStack {
@@ -33,6 +36,8 @@ struct RandomImageView: View {
                 guard let uiImage = UIImage(named: images[currentIndex]) else { return }
             // resize the image
                 let resizedImage = uiImage.resize(to: CGSize(width: 224, height: 224))
+                
+                
                 
             }.buttonStyle(.borderedProminent)
             
