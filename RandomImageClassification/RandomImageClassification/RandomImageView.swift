@@ -17,7 +17,7 @@ struct RandomImageView: View {
             Image(images[currentIndex])
                 .resizable()
                 .aspectRatio(contentMode: .fit)
-                .frame(width: 225, height: 225)
+                .frame(width: 300, height: 300)
             HStack {
                 Button("Previous") {
                     currentIndex -= 1
@@ -28,6 +28,14 @@ struct RandomImageView: View {
                     currentIndex += 1
                 }.buttonStyle(.bordered)
                     .disabled(currentIndex == images.count - 1)
+            }
+            Button("Predict") {
+                
+                
+            }.buttonStyle(.borderedProminent)
+            
+            List(1...10, id: \.self) { text in
+                Text("Prediction \(index)")
             }
         }
         .padding()
