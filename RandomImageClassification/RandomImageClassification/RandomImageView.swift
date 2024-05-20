@@ -12,6 +12,7 @@ struct RandomImageView: View {
     
     let images = ["1", "2", "3", "4"]
     @State private var currentIndex =  0
+    @State private var probs: [String: Double] = [: ]
     
     let model = try! MobileNetV2(configuration: MLModelConfiguration())
     
@@ -36,14 +37,18 @@ struct RandomImageView: View {
                 guard let uiImage = UIImage(named: images[currentIndex]) else { return }
             // resize the image
                 let resizedImage = uiImage.resize(to: CGSize(width: 224, height: 224))
+                guard let buffer = resizedImage.toCVPixelBuffer() else { return }
                 
-                
-                
+                do {
+                    let prediction = try model.prediction(image: buffer)
+                    probs = prediction.classLabelProbs
+                    print(prediction.classLabel)
+                } catch {
+                    print(error.localizedDescription)
+                }
             }.buttonStyle(.borderedProminent)
             
-            List(1...10, id: \.self) { text in
-                Text("Prediction \(index)")
-            }
+            ProbabilityListView(probs: Array(probs))
         }
         .padding()
     }

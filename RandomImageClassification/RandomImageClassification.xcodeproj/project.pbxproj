@@ -9,6 +9,7 @@
 /* Begin PBXBuildFile section */
 		F76121912BFBCDA700D4E87C /* MobileNetV2.mlmodel in Sources */ = {isa = PBXBuildFile; fileRef = F76121902BFBCDA700D4E87C /* MobileNetV2.mlmodel */; };
 		F76121932BFBD4B500D4E87C /* UIImage+Ext.swift in Sources */ = {isa = PBXBuildFile; fileRef = F76121922BFBD4B500D4E87C /* UIImage+Ext.swift */; };
+		F76121952BFBDB2700D4E87C /* ProbabilityListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F76121942BFBDB2700D4E87C /* ProbabilityListView.swift */; };
 		F7A335C82BF8651D00C1F61A /* RandomImageClassificationApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = F7A335C72BF8651D00C1F61A /* RandomImageClassificationApp.swift */; };
 		F7A335CC2BF8652300C1F61A /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = F7A335CB2BF8652300C1F61A /* Assets.xcassets */; };
 		F7A335CF2BF8652300C1F61A /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = F7A335CE2BF8652300C1F61A /* Preview Assets.xcassets */; };
@@ -18,6 +19,7 @@
 /* Begin PBXFileReference section */
 		F76121902BFBCDA700D4E87C /* MobileNetV2.mlmodel */ = {isa = PBXFileReference; lastKnownFileType = file.mlmodel; path = MobileNetV2.mlmodel; sourceTree = "<group>"; };
 		F76121922BFBD4B500D4E87C /* UIImage+Ext.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIImage+Ext.swift"; sourceTree = "<group>"; };
+		F76121942BFBDB2700D4E87C /* ProbabilityListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProbabilityListView.swift; sourceTree = "<group>"; };
 		F7A335C42BF8651D00C1F61A /* RandomImageClassification.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = RandomImageClassification.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		F7A335C72BF8651D00C1F61A /* RandomImageClassificationApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RandomImageClassificationApp.swift; sourceTree = "<group>"; };
 		F7A335CB2BF8652300C1F61A /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
@@ -61,6 +63,7 @@
 				F7A335CB2BF8652300C1F61A /* Assets.xcassets */,
 				F7A335CD2BF8652300C1F61A /* Preview Content */,
 				F7A335C72BF8651D00C1F61A /* RandomImageClassificationApp.swift */,
+				F76121942BFBDB2700D4E87C /* ProbabilityListView.swift */,
 			);
 			path = RandomImageClassification;
 			sourceTree = "<group>";
@@ -147,6 +150,7 @@
 				F76121932BFBD4B500D4E87C /* UIImage+Ext.swift in Sources */,
 				F7A335C82BF8651D00C1F61A /* RandomImageClassificationApp.swift in Sources */,
 				F7A335D62BF8656500C1F61A /* RandomImageView.swift in Sources */,
+				F76121952BFBDB2700D4E87C /* ProbabilityListView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
