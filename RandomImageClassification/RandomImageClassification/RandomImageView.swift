@@ -30,7 +30,9 @@ struct RandomImageView: View {
                     .disabled(currentIndex == images.count - 1)
             }
             Button("Predict") {
-                
+                guard let uiImage = UIImage(named: images[currentIndex]) else { return }
+            // resize the image
+                let resizedImage = uiImage.resize(to: CGSize(width: 224, height: 224))
                 
             }.buttonStyle(.borderedProminent)
             
