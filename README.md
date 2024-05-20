@@ -1,2 +1,2 @@
 # SwiftUIImageClassification
-fruit image Classification
+random image classification
