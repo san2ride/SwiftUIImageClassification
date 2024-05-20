@@ -16,6 +16,13 @@ struct RandomImageView: View {
     
     let model = try! MobileNetV2(configuration: MLModelConfiguration())
     
+    private var sortedProbs: [Dictionary<String, Double>.Element] {
+        let probsArray = Array(probs)
+        return probsArray.sorted { lhs, rhs in
+            lhs.value > rhs.value
+        }
+    }
+    
     var body: some View {
         VStack {
             Image(images[currentIndex])
@@ -48,7 +55,7 @@ struct RandomImageView: View {
                 }
             }.buttonStyle(.borderedProminent)
             
-            ProbabilityListView(probs: Array(probs))
+            ProbabilityListView(probs: sortedProbs)
         }
         .padding()
     }

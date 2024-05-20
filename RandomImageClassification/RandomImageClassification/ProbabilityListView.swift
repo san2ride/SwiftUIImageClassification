@@ -14,7 +14,8 @@ struct ProbabilityListView: View {
         List(probs, id: \.key) { (key, value) in
             HStack {
                 Text(key)
-                Text("\(value)")
+                Spacer()
+                Text(NSNumber(value: value), formatter: NumberFormatter.percentage)
             }
         }
     }
